@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ui_class/models/card_data_model.dart';
+
+import '../models/card_data_model.dart';
 
 class TaskManagementProvider with ChangeNotifier{
 

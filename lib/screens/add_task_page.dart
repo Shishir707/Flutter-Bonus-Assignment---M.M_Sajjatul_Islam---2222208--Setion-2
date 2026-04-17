@@ -1,11 +1,11 @@
+
 import 'package:flutter/material.dart';
-import 'package:flutter_ui_class/data/dummy_data.dart';
-import 'package:flutter_ui_class/models/card_data_model.dart';
-import 'package:flutter_ui_class/providers/task_management_provider.dart';
-import 'package:flutter_ui_class/utils/validators.dart';
-import 'package:flutter_ui_class/widgets/core_input_field.dart';
-import 'package:flutter_ui_class/widgets/password_input_filed.dart';
-import 'package:provider/provider.dart';
+
+import '../models/card_data_model.dart';
+import '../providers/task_management_provider.dart';
+import '../utils/validators.dart';
+import '../widgets/core_input_field.dart';
+import '../widgets/password_input_filed.dart';
 
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({super.key});
@@ -24,6 +24,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
   final _formKey = GlobalKey<FormState>();
 
   late TaskManagementProvider taskProvider;
+
+  get Provider => null;
 
   @override
   void initState() {

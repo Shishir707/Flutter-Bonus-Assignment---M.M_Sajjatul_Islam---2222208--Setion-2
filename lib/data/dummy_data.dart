@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ui_class/models/card_data_model.dart';
-
 import '../models/card_data_model.dart';
 
 class DummyData {
 
   List<CardDataModel> tasks = [
     CardDataModel(title: "Task 1", subtitle: "This is the first task"),
-    CardDataModel(title: "Task 2", subtitle: "This is the second task", Icon: Icons.abc_rounded),
+    CardDataModel(title: "Task 2", subtitle: "This is the second task", icon: Icons.abc_rounded),
     CardDataModel(title: "Task 3", subtitle: "This is the third task", icon: Icons.account_balance),
     CardDataModel(title: "Task 4", subtitle: "This is the fourth task", icon: Icons.add),
     CardDataModel(title: "Task 5", subtitle: "This is the fifth task", icon: Icons.delete),
