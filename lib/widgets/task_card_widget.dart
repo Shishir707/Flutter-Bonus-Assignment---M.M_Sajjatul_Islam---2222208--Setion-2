@@ -31,24 +31,20 @@ class TaskCardWidget extends StatelessWidget {
 
         trailing: IconButton(
           icon: const Icon(Icons.delete, color: Colors.red),
+
           onPressed:
               onTap ??
               () async {
-                await FirebaseFirestore.instance
+                FirebaseFirestore.instance
                     .collection('task')
                     .doc(docId)
                     .delete();
-                if (context.mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        "Task deleted successfully!,",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      backgroundColor: Colors.red,
-                    ),
-                  );
-                }
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text("Task deleted successfully!"),
+                    backgroundColor: Colors.red,
+                  ),
+                );
               },
         ),
       ),

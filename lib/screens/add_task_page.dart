@@ -1,12 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../models/card_data_model.dart';
 import '../providers/task_management_provider.dart';
 import '../utils/validators.dart';
 import '../widgets/core_input_field.dart';
-import '../widgets/password_input_filed.dart';
 
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({super.key});
