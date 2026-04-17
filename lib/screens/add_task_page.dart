@@ -55,6 +55,18 @@ class _AddTaskPageState extends State<AddTaskPage> {
           key: _formKey,
           child: Column(
             children: [
+              Image.asset(
+                "assets/add_task.png",
+                width: 500,
+                height: 200,
+                fit: BoxFit.cover,
+              ),
+              SizedBox(height: 10),
+              Text(
+                "Enter Your New Task",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 20),
               CoreInputField(
                 controller: _idController,
                 keyboardType: TextInputType.number,
@@ -118,19 +130,6 @@ class _AddTaskPageState extends State<AddTaskPage> {
       ),
     );
   }
-
-  // Future<void> OnTapAddButton() async {
-  //   final firestore = FirebaseFirestore.instance;
-  //
-  //   final docRef = firestore.collection('task').doc();
-  //
-  //   await docRef.set({
-  //     'id': _idController.text.trim(),
-  //     'title': _titleController.text.trim(),
-  //     'subtitle': _descriptionController.text.trim(),
-  //     'createdAt': DateTime.now().toIso8601String(),
-  //   });
-  // }
 
   Future<void> OnTapAddButton() async {
     final firestore = FirebaseFirestore.instance;
