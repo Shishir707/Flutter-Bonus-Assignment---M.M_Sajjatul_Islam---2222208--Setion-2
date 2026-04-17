@@ -112,7 +112,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
               taskProvider.addTaskExternal(
                 CardDataModel(
                   title: _titleController.text,
-                  subtitle: taskDetails,
+                  subtitle: taskDetails, id: '', icon: null,
                 ),
               );
 
