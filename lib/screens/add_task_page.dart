@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../models/card_data_model.dart';
 import '../providers/task_management_provider.dart';
@@ -29,8 +30,11 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
   @override
   void initState() {
-    taskProvider = Provider.of<TaskManagementProvider>(context, listen: false);
     super.initState();
+
+    Future.microtask(() {
+      final provider = context.read<TaskManagementProvider>();
+    });
   }
 
   @override
