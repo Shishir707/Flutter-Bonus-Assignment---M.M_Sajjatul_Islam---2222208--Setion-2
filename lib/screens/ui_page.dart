@@ -37,7 +37,7 @@ class _UiPageState extends State<UiPage> {
 
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return Center(
-              child: Image.asset("assets/no_task.png", width: 200, height: 200),
+              child: Image.asset("assets/no_task.png", width: 500, height: 500),
             );
           }
 
@@ -55,6 +55,7 @@ class _UiPageState extends State<UiPage> {
                 title: task.title,
                 subtitle: task.subtitle,
                 icon: Icons.task,
+                docId: task.id,
               );
             },
           );
