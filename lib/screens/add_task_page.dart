@@ -1,4 +1,4 @@
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,10 +16,8 @@ class AddTaskPage extends StatefulWidget {
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
+  final _idController = TextEditingController();
   final _titleController = TextEditingController();
-  final _assignedToController = TextEditingController();
-  final _phoneNumberController = TextEditingController();
-  final _passwordController = TextEditingController();
   final _descriptionController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
@@ -39,10 +37,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
   @override
   void dispose() {
+    _idController.clear();
     _titleController.clear();
-    _assignedToController.clear();
-    _phoneNumberController.clear();
-    _passwordController.clear();
     _descriptionController.clear();
   }
 
@@ -60,33 +56,20 @@ class _AddTaskPageState extends State<AddTaskPage> {
           child: Column(
             children: [
               CoreInputField(
+                controller: _idController,
+                keyboardType: TextInputType.number,
+                maxLines: 1,
+                labelText: "Enter ID",
+                validator: CustomValidators.validateTaskTitle,
+              ),
+              const SizedBox(height: 40),
+              CoreInputField(
                 controller: _titleController,
                 keyboardType: TextInputType.text,
                 maxLines: 1,
                 labelText: "Task Title",
                 validator: CustomValidators.validateTaskTitle,
               ),
-
-              const SizedBox(height: 20),
-              CoreInputField(
-                controller: _assignedToController,
-                keyboardType: TextInputType.text,
-                maxLines: 1,
-                labelText: "Assigned To",
-                validator: CustomValidators.validateAssignedTo,
-              ),
-
-              const SizedBox(height: 20),
-              CoreInputField(
-                controller: _phoneNumberController,
-                keyboardType: TextInputType.phone,
-                maxLines: 1,
-                labelText: "Phone Number",
-                validator: CustomValidators.validatePhoneNumber,
-              ),
-
-              const SizedBox(height: 20),
-              PasswordInputFiled(controller: _passwordController),
 
               const SizedBox(height: 40),
               CoreInputField(
@@ -107,14 +90,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
           onPressed: () {
             if (_formKey.currentState!.validate()) {
               final String taskDetails =
-                  "Assigned to: ${_assignedToController.text} \nPhone: ${_phoneNumberController.text} \nDescription: ${_descriptionController.text} \n \n The task Password is ${_passwordController.text}";
+                  "Title: ${_titleController.text} \nDescription: ${_descriptionController.text} \n";
 
-              taskProvider.addTaskExternal(
-                CardDataModel(
-                  title: _titleController.text,
-                  subtitle: taskDetails, id: '', icon: null,
-                ),
-              );
+              OnTapAddButton();
 
               Navigator.of(context).pop();
 
@@ -139,5 +117,30 @@ class _AddTaskPageState extends State<AddTaskPage> {
         ),
       ),
     );
+  }
+
+  // Future<void> OnTapAddButton() async {
+  //   final firestore = FirebaseFirestore.instance;
+  //
+  //   final docRef = firestore.collection('task').doc();
+  //
+  //   await docRef.set({
+  //     'id': _idController.text.trim(),
+  //     'title': _titleController.text.trim(),
+  //     'subtitle': _descriptionController.text.trim(),
+  //     'createdAt': DateTime.now().toIso8601String(),
+  //   });
+  // }
+
+  Future<void> OnTapAddButton() async {
+    final firestore = FirebaseFirestore.instance;
+
+    final String customId = _titleController.text.trim();
+
+    await firestore.collection('task').doc(customId).set({
+      'title': _titleController.text.trim(),
+      'subtitle': _descriptionController.text.trim(),
+      'createdAt': DateTime.now().toIso8601String(),
+    });
   }
 }
