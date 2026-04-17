@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import '../data/dummy_data.dart';
 import '../providers/task_management_provider.dart';
 import '../widgets/task_card_widget.dart';
+import 'add_task_page.dart';
+
 class UiPage extends StatefulWidget {
   const UiPage({super.key});
 
@@ -28,39 +32,36 @@ class _UiPageState extends State<UiPage> {
       ),
 
       body: Consumer<TaskManagementProvider>(
-          builder: (context, taskProvider, _) {
-            return RefreshIndicator(
+        builder: (context, taskProvider, _) {
+          return RefreshIndicator(
               onRefresh: () async {
                 setState(() {});
               },
-              child: ListView.builder(
-                padding: EdgeInsets.all(16),
-                itemCount: taskProvider.tasks.length,
-                itemBuilder: (context, index) {
-                  final task = taskProvider.tasks[index];
+            child: ListView.builder(
+              padding: EdgeInsets.all(16),
+              itemCount: taskProvider.tasks.length,
+              itemBuilder: (context, index) {
+                final task = taskProvider.tasks[index];
 
-                  return TaskCardWidget(
-                    title: task.title,
-                    subtitle: task.subtitle,
-                    icon: task.icon,
-                  );
-                },
-              ),
-            );
-          }
+                return TaskCardWidget(
+                  title: task.title,
+                  subtitle: task.subtitle,
+                  icon: task.icon,
+                );
+              },
+            ),
+          );
+        }
       ),
 
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => AddTaskPage()));
+          .push(MaterialPageRoute(builder: (context) => AddTaskPage()));
         },
         child: Icon(Icons.add),
         backgroundColor: Colors.purpleAccent,
       ),
     );
   }
-}
-
-Widget? Consumer({required RefreshIndicator Function(dynamic context, dynamic taskProvider, dynamic _) builder}) {
 }
